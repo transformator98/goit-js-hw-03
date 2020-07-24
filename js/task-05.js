@@ -10,7 +10,16 @@ const products = [
 ];
 
 const getAllPropValues = function (arr, prop) {
-  // твой код
+  const args = [];
+  for (const product of arr) {
+    const keys = Object.keys(product);
+    for (const key of keys) {
+      if (key === prop) {
+        args.push(product[key]);
+      }
+    }
+  }
+  return args;
 };
 
 /*
