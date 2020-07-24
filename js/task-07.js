@@ -21,13 +21,19 @@ const account = {
   balance: 0,
 
   // История транзакций
-  transactions: [],
+  transactions: [{ name: "🍎", price: 50 }],
 
   /*
    * Метод создает и возвращает объект транзакции.
    * Принимает сумму и тип транзакции.
    */
-  createTransaction(amount, type) {},
+  createTransaction(amount, type) {
+    for (const transaction of this.transactions) {
+      console.log(transaction);
+      if (transaction.name === Transaction.name) {
+      }
+    }
+  },
 
   /*
    * Метод отвечающий за добавление суммы к балансу.
@@ -64,3 +70,4 @@ const account = {
    */
   getTransactionTotal(type) {},
 };
+account.createTransaction(2, DEPOSIT);

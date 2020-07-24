@@ -5,29 +5,44 @@
  * "имя":"кол-во задач".
  */
 // const findBestEmployee = function (employees) {
-//   console.table(employees);
-//   const values = Object.values(employees);
-//   console.log(values);
-//   let moreTasks = values[0];
-//   for (let i = 1; i < values.length; i += 1) {
-//     if (values[i] > moreTasks) {
-//       moreTasks = values[i];
+//   // console.table(employees);
+//   let result = 0;
+
+//   const keys = Object.keys(employees);
+//   for (const key of keys) {
+//     // console.log(employees[key]);
+//     if (employees[key] > result) {
+//       result = employees[key];
 //     }
 //   }
-//   return moreTasks;
+//   return result;
 // };
 const findBestEmployee = function (employees) {
-  console.table(employees);
   const values = Object.values(employees);
-  console.log(values);
   let moreTasks = values[0];
   for (let i = 1; i < values.length; i += 1) {
     if (values[i] > moreTasks) {
       moreTasks = values[i];
     }
   }
-  return moreTasks;
+  for (let key in employees) {
+    if (moreTasks === employees[key]) {
+      return key;
+    }
+  }
 };
+// const findBestEmployee = function (employees) {
+//   const keys = Object.keys(employees);
+//   const add = [];
+//   console.log(keys);
+//   for (var key of keys) {
+//   }
+//   const summ = Math.max(employees[key]);
+//   console.log(summ);
+
+//   console.log(employees[summ]);
+// };
+
 /*
  * Вызовы функции для проверки работоспособности твоей реализации.
  */
@@ -45,7 +60,7 @@ console.log(
     david: 315,
     helen: 1210,
     lorence: 199,
-  })
+  }) //helen
 );
 console.log(
   findBestEmployee({
