@@ -10,8 +10,14 @@ const products = [
   { name: "Захват", price: 1200, quantity: 2 },
 ];
 
-const calculateTotalPrice = function (allProdcuts, productName) {
-  // твой код
+const calculateTotalPrice = function (allProducts, productName) {
+  let add;
+  for (const product of allProducts) {
+    if (product.name === productName) {
+      add = product.price * product.quantity;
+    }
+  }
+  return add;
 };
 
 /*
@@ -20,3 +26,5 @@ const calculateTotalPrice = function (allProdcuts, productName) {
 console.log(calculateTotalPrice(products, "Радар")); // 5200
 
 console.log(calculateTotalPrice(products, "Дроид")); // 2800
+
+console.log(calculateTotalPrice(products, "Сканер")); // 8100
