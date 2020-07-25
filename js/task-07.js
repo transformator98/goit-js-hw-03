@@ -21,18 +21,18 @@ const account = {
   balance: 0,
 
   // История транзакций
-  transactions: [{ name: "🍎", price: 50 }],
+  transactions: [],
 
   /*
    * Метод создает и возвращает объект транзакции.
    * Принимает сумму и тип транзакции.
    */
   createTransaction(amount, type) {
-    for (const transaction of this.transactions) {
-      console.log(transaction);
-      if (transaction.name === Transaction.name) {
-      }
-    }
+    const transaction = {};
+    transaction.id = this.transactions.length + 1;
+    transaction.amount = amount;
+    transaction.type = type;
+    return transaction;
   },
 
   /*
@@ -41,7 +41,12 @@ const account = {
    * Вызывает createTransaction для создания объекта транзакции
    * после чего добавляет его в историю транзакций
    */
-  deposit(amount) {},
+  deposit(amount) {
+    const transaction = this.createTransaction(amount, Transaction.DEPOSIT);
+    this.balance += amount;
+    this.transactions.push(transaction);
+    console.log(`Ваш депозит пополнен! Текущий балланс ${this.balance} USD.`);
+  },
 
   /*
    * Метод отвечающий за снятие суммы с баланса.
@@ -52,12 +57,27 @@ const account = {
    * Если amount больше чем текущий баланс, выводи сообщение
    * о том, что снятие такой суммы не возможно, недостаточно средств.
    */
-  withdraw(amount) {},
+  withdraw(amount) {
+    if (this.balance < amount) {
+      console.log(
+        `Недостаточно средств для снятия! Сумма снятия ${amount} USD, Ваш текущий балланс ${this.balance} USD.`
+      );
+    } else {
+      const transaction = this.createTransaction(amount, Transaction.WITHDRAW);
+      this.transactions.push(transaction);
+      this.balance -= amount;
+      console.log(
+        `Операция снятия проведена успешна! Ваш остаток после операции ${this.balance} USD.`
+      );
+    }
+  },
 
   /*
    * Метод возвращает текущий баланс
    */
-  getBalance() {},
+  getBalance() {
+    return this.ballance;
+  },
 
   /*
    * Метод ищет и возвращает объект транзации по id
@@ -70,4 +90,12 @@ const account = {
    */
   getTransactionTotal(type) {},
 };
-account.createTransaction(2, DEPOSIT);
+account.createTransaction(20, { DEPOSIT: "deposit" });
+account.createTransaction(30, { WITHDRAW: "withdraw" });
+account.createTransaction(310, { WITHDRAW: "withdraw" });
+// account.createTransaction(20, { DEPOSIT: "deposit" });
+account.deposit(30);
+account.deposit(30);
+// account.deposit(30);
+account.withdraw(40);
+account.withdraw(40);
