@@ -5,18 +5,20 @@
  * "имя":"кол-во задач".
  */
 // const findBestEmployee = function (employees) {
-//   // console.table(employees);
-//   let result = 0;
+//   let result = [];
 
-//   const keys = Object.keys(employees);
-//   for (const key of keys) {
-//     // console.log(employees[key]);
-//     if (employees[key] > result) {
-//       result = employees[key];
+//   for (const key in employees) {
+//     result.push(employees[key]);
+//   }
+//   const add = Math.max(...result);
+
+//   for (const key in employees) {
+//     if (add === employees[key]) {
+//       return key;
 //     }
 //   }
-//   return result;
 // };
+
 const findBestEmployee = function (employees) {
   const values = Object.values(employees);
   let moreTasks = values[0];
@@ -31,17 +33,6 @@ const findBestEmployee = function (employees) {
     }
   }
 };
-// const findBestEmployee = function (employees) {
-//   const keys = Object.keys(employees);
-//   const add = [];
-//   console.log(keys);
-//   for (var key of keys) {
-//   }
-//   const summ = Math.max(employees[key]);
-//   console.log(summ);
-
-//   console.log(employees[summ]);
-// };
 
 /*
  * Вызовы функции для проверки работоспособности твоей реализации.
@@ -52,6 +43,7 @@ console.log(
     david: 35,
     helen: 1,
     lorence: 99,
+    test: 12,
   })
 ); // lorence
 console.log(
