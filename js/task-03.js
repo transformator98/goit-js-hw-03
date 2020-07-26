@@ -20,18 +20,37 @@
 // };
 
 const findBestEmployee = function (employees) {
-  const values = Object.values(employees);
-  let moreTasks = values[0];
-  for (let i = 1; i < values.length; i += 1) {
-    if (values[i] > moreTasks) {
-      moreTasks = values[i];
+  let moreTasks = 0;
+  let name;
+  for (const key in employees) {
+    if (moreTasks < employees[key]) {
+      moreTasks = employees[key];
+      name = key;
     }
   }
-  for (let key in employees) {
-    if (moreTasks === employees[key]) {
-      return key;
-    }
-  }
+  return name;
+
+  // const keys = Object.keys(employees);
+  // let moreTasks = 0;
+  // let name;
+  // for (const key of keys) {
+  //   if (moreTasks < employees[key]) {
+  //     moreTasks = employees[key];
+  //     name = key;
+  //   }
+  // }
+  // return name;
+
+  // for (let i = 1; i < values.length; i += 1) {
+  //   if (values[i] > moreTasks) {
+  //     moreTasks = values[i];
+  //   }
+  // }
+  // for (let key in employees) {
+  //   if (moreTasks === employees[key]) {
+  //     return key;
+  //   }
+  // }
 };
 
 /*
