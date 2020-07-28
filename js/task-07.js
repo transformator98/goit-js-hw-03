@@ -32,6 +32,7 @@ const account = {
     transaction.id = this.transactions.length + 1;
     transaction.amount = amount;
     transaction.type = type;
+
     return transaction;
   },
 
@@ -82,7 +83,10 @@ const account = {
   /*
    * Метод ищет и возвращает объект транзации по id
    */
-  getTransactionDetails(id) {},
+  getTransactionDetails(id) {
+    console.log(this.createTransaction("transaction", transaction.id));
+    return this.transactions.find((transaction) => transaction.id === id);
+  },
 
   /*
    * Метод возвращает количество средств
@@ -99,3 +103,4 @@ account.deposit(30);
 // account.deposit(30);
 account.withdraw(40);
 account.withdraw(40);
+account.getTransactionDetails(1);
