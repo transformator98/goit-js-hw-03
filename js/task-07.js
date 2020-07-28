@@ -8,8 +8,8 @@
  * Можно положить либо снять деньги со счета.
  */
 const Transaction = {
-  DEPOSIT: "deposit",
-  WITHDRAW: "withdraw",
+  DEPOSIT: 'deposit',
+  WITHDRAW: 'withdraw',
 };
 
 /*
@@ -46,7 +46,9 @@ const account = {
     const transaction = this.createTransaction(amount, Transaction.DEPOSIT);
     this.balance += amount;
     this.transactions.push(transaction);
-    console.log(`Ваш депозит пополнен! Текущий балланс ${this.balance} USD.`);
+    console.log(
+      `Ваш депозит пополнен на сумму ${amount} USD! Текущий балланс ${this.balance} USD.`,
+    );
   },
 
   /*
@@ -61,14 +63,14 @@ const account = {
   withdraw(amount) {
     if (this.balance < amount) {
       console.log(
-        `Недостаточно средств для снятия! Сумма снятия ${amount} USD, Ваш текущий балланс ${this.balance} USD.`
+        `Недостаточно средств для снятия! Сумма снятия ${amount} USD, Ваш текущий балланс ${this.balance} USD.`,
       );
     } else {
       const transaction = this.createTransaction(amount, Transaction.WITHDRAW);
       this.transactions.push(transaction);
       this.balance -= amount;
       console.log(
-        `Операция снятия проведена успешна! Ваш остаток после операции ${this.balance} USD.`
+        `Операция снятия проведена успешна, сумма снятия ${amount} USD! Остаток после операции ${this.balance} USD.`,
       );
     }
   },
@@ -77,30 +79,48 @@ const account = {
    * Метод возвращает текущий баланс
    */
   getBalance() {
-    return this.ballance;
+    return `Ваш текущий балланс ${this.balance} USD`;
   },
 
   /*
    * Метод ищет и возвращает объект транзации по id
    */
   getTransactionDetails(id) {
-    console.log(this.createTransaction("transaction", transaction.id));
-    return this.transactions.find((transaction) => transaction.id === id);
+    for (const transaction of this.transactions) {
+      if (transaction.id === id) {
+        return transaction;
+      }
+    }
   },
 
   /*
    * Метод возвращает количество средств
    * определенного типа транзакции из всей истории транзакций
    */
-  getTransactionTotal(type) {},
+  getTransactionTotal(type) {
+    let total = 0;
+    for (const transaction of this.transactions) {
+      if (transaction.type === type) {
+        total += transaction.amount;
+      }
+    }
+    return total;
+  },
 };
-account.createTransaction(20, { DEPOSIT: "deposit" });
-account.createTransaction(30, { WITHDRAW: "withdraw" });
-account.createTransaction(310, { WITHDRAW: "withdraw" });
-// account.createTransaction(20, { DEPOSIT: "deposit" });
-account.deposit(30);
-account.deposit(30);
-// account.deposit(30);
-account.withdraw(40);
-account.withdraw(40);
-account.getTransactionDetails(1);
+
+account.deposit(150);
+account.deposit(1000);
+account.withdraw(500);
+account.withdraw(400);
+
+console.log(account.getTransactionDetails(1));
+console.log(account.getTransactionDetails(2));
+console.log(account.getTransactionDetails(3));
+console.log(account.getTransactionDetails(4));
+
+console.log(
+  `Withdrawals:  ${account.getTransactionTotal(Transaction.WITHDRAW)} USD.`,
+);
+console.log(
+  `Deposits: ${account.getTransactionTotal(Transaction.DEPOSIT)} USD.`,
+);
